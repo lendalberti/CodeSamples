@@ -1,0 +1,151 @@
+
+#offer_options_window
+  .heading
+    Select your option
+  .close
+    close
+    %span
+      x
+
+  .option_list
+  -if @offer
+    - if @offer.offer_options
+      - @offer.offer_options.each do |option|
+
+        .option_list
+          %p
+          .option_buy_button
+            = link_to 'Buy', new_offer_order_path(@offer, :offer_option_id => option.id)
+          .option_price
+            = "$#{option.sales_price.to_i}"
+          .option_title
+            = option.title.truncate(110)
+          .option_value
+            = "Discount: #{option.discount}%, Savings: $#{(option.retail_price-option.sales_price).to_i}"
+
+
+.offer
+  %input#user_logged_in{:type => "hidden", :value => (current_user ? 1 : 0)}
+  %input#offer_countdown{:name => "offer_countdown", :type => "hidden", :value => @offer_countdown}
+  %input#option_count{:name => "option_count", :type => "hidden", :value => @option_count}
+
+  -if @offer
+    .offer_image
+      -if @image_url
+        = image_tag(@image_url, :id => 'offer_image')
+      -elsif @offer.image.nil?
+        = image_tag("/images/blank.png", :id => 'offer_image')
+      -else
+        = image_tag(@offer.image.url(:home_page), :id => 'offer_image', :width => "320", :height => "400")
+
+    .offer_details
+
+      #merchant_name
+        = @offer.merchant.name
+
+      #title
+        = @offer.title.truncate(110)
+
+      #sales_price
+        #background
+          %img{:src => "/images/red_badge.png"}
+        #amount
+          .from
+            = "starting at" if @offer && @offer.has_multiple_options?
+          - if @minimal_deal_price.to_i < 10
+            .digits_1
+              = "$#{@minimal_deal_price.to_i}"
+          - elsif @minimal_deal_price.to_i < 100
+            .digits_2
+              = "$#{@minimal_deal_price.to_i}"
+          - else
+            .digits_3
+              = "$#{@minimal_deal_price.to_i}"
+
+
+
+      #buy_now
+        .see_options
+          - if !@offer.id.nil? &&  @option_count > 1
+            = link_to "See All Options (#{@option_count})", new_offer_order_path(@offer), :class => "buy_now_button"
+          - else
+            .div_spacing
+
+        .button
+          -if @offer_future || @offer.id == nil
+            = link_to image_tag('/images/offer_coming_soon.png', :alt => "Coming Soon"), '#'
+          -elsif @offer_expired
+            = link_to image_tag('/images/offer_expired.png', :alt => "Deal Expired"), '#'
+          -elsif @offer_sold_out
+            = link_to image_tag('/images/offer_sold_out.png', :alt => "Sold Out!"), '#'
+          -else
+            -if @option_count > 1
+              = link_to image_tag('/images/buy_now.png', :alt => "Buy Now", :class => "buy_now_button"), new_offer_order_path(@offer)
+            -else
+              = link_to image_tag('/images/buy_now.png', :alt => "Buy Now"), new_offer_order_path(@offer)
+
+
+        .time_remaining
+          -if !@offer_sold_out && !@offer_expired
+            #tgc_countdown= @offer_countdown
+
+
+        .gift_link
+          .gift_image
+            - if @option_count > 1
+              = link_to image_tag('/images/gift06.png', :alt => "Purchase as a Gift", :size => "40x40", :class => "buy_now_button gift"), @preview ? '#' : new_offer_order_path(@offer, :gift => 'yes')
+            - else
+              = link_to image_tag('/images/gift06.png', :alt => "Purchase as a Gift", :size => "40x40"), @preview ? '#' : new_offer_order_path(@offer, :gift => 'yes')
+          .gift_text
+            - if @option_count > 1
+              = link_to "Purchase as a Gift",  @preview ? '#' : new_offer_order_path(@offer, :gift => 'yes'), :class => "buy_now_button gift"
+            - else
+              = link_to "Purchase as a Gift",  @preview ? '#' : new_offer_order_path(@offer, :gift => 'yes')
+
+
+
+        .sub_title_1 GET IT FOR FREE
+        .sub_title_2 when three friends buy
+
+      #stats
+        .purchased
+          #count
+            = @offer.total_number_of_coupons
+          #text
+            purchased
+        .discount
+          #count
+            - if !@offer.id.nil? &&  @option_count > 1
+              %span
+                up to
+            ="#{@offer.max_option_discount}%"
+          #text
+            discount
+
+      #social
+        = render :partial => 'shared/addthis', :locals => {:offer => @offer, :user => current_user}
+
+
+      #description
+        :markdown
+          #{@offer.long_desc}
+
+      #fine_print
+        %b= "Expires #{@offer.coupon_exp_date.strftime("%b %d, %Y")}"
+        :markdown
+          #{@offer.fine_print}
+
+
+      #merchant_address
+        #merchant_google_map_location
+          = link_to(image_tag("/images/map_pin.png"), @merchant_location_link)
+
+        = link_to(@offer.merchant.street.truncate(32), @merchant_location_link)
+        %br
+        #{@offer.merchant.city.truncate(20)}, #{@offer.merchant.state} #{@offer.merchant.zip}
+        %br
+        #{@offer.merchant.phone_number}
+        - if @offer.merchant.url
+          %br
+          %a{:href => @offer.merchant.url}
+            Company Website

@@ -1,0 +1,429 @@
+@import partials/base
+@import offers/new
+
+$offer_image_width: 320px
+$offer_image_length: 400px
+
+#offer_options_window
+  display: none
+  background-color: #fff
+  color: #464442
+
+  .heading
+    +column(5)
+    padding: 10px 0px 10px 0px
+    font:
+      size: 18px
+      family: 'Arial'
+      weight: bold
+  .close
+    +column(2, true)
+    float: right
+    color: #464442
+    text-align: right
+    font:
+      size: 12px
+      weight: normal
+      family: 'Arial'
+    span
+      font:
+        size: 24px
+        weight: bold
+  .close:hover
+    color: red
+    cursor: pointer
+    text-decoration: underline
+
+
+  .option_list
+    color: #464442
+    line-height: 105%
+    p
+      +column(8)
+      width: 440px
+      padding-top: 5px
+      border-top: 1px dotted #464442
+
+    .option_buy_button
+      +generic_button_link(2)
+
+    .option_price
+      +column(8)
+      padding-left: 10px
+      text-align: left
+      font:
+        size: 14px
+        weight: bold
+        family: 'Arial'
+    .option_title
+      +column(8)
+      padding-left: 10px
+      font:
+        size: 12px
+        weight: normal
+        family: 'Arial'
+
+    .option_value
+      +column(8)
+      padding-left: 94px
+      margin-bottom: 10px
+      color: #9E9E9E
+      font:
+        size: 11px
+        weight: normal
+        family: 'Arial'
+
+
+.offer
+  overflow: visible
+  +column(22, true)
+  margin-top: 20px
+  padding: 10px
+  background-color: white
+  border: 1px solid #BDBDBD
+  -moz-border-radius: 18px
+  -webkit-border-radius: 18px
+
+  .offer_image
+    +column(8)
+    margin: 5px
+    img
+      width: $offer_image_width
+  .offer_details
+    +column(13)
+    margin-top: 0px
+    #merchant_name
+      +column(13)
+      color: #585858
+      margin: 5px 0px 0px 40px
+      text-transform: uppercase
+      letter-spacing: 2px
+      font:
+        size: 24px
+        weight: normal
+        family: "Arial", sans-serif
+
+    #title
+      margin: 0px 0px 0px 40px
+      color: #585858
+      font:
+        size: 14px
+        weight: bold
+        family: "Georgia", serif
+        style: italic
+    #sales_price
+      #background
+        +column(4)
+        margin: 10px 0px 0px 20px
+        img
+          height: 152px
+          width: 152px
+      #amount
+        +column(4)
+        color: white
+        font:
+          weight: bold
+          family: "Georgia", serif
+        .from
+          +column(3)
+          margin: 35px 0px 0px -100px
+          padding-bottom: 10px
+          color: white
+          font:
+            size: 12px
+            weight: normal
+            family: "Georgia", serif
+        .digits_1
+          +digits_1
+        .digits_2
+          +digits_2
+        .digits_3
+          +digits_3
+
+
+    #stats
+      +column(5)
+      margin: -140px 0px 0px 192px
+      border-right: 1px dotted #666
+      height: 120px
+      width: 120px
+
+      .purchased
+        +column(2)
+        margin: 20px
+        text-align: center
+        #count
+          height: 20px
+          font:
+            size: 16px
+            weight: bold
+            family: "Georgia", serif
+        #text
+          color: #848484
+          margin-top: -2px
+          font:
+            size: 14px
+            weight: bold
+            family: "Georgia", sans-serif
+            variant: small-caps
+
+      .discount
+        +column(2)
+        width: 140px
+        heigth: 100px
+        margin: -10px 0px 0px -20px
+        padding-top: 10px
+        border-top: 1px dotted #666
+        text-align: center
+
+        #count
+          height: 20px
+          font:
+            size: 16px
+            weight: bold
+            family: "Georgia", serif
+          span
+            color: #848484
+            vertical-align: bottom
+            font:
+              size: 10px
+              weight: normal
+              family: "Georgia", serif
+        #text
+          color: #848484
+          margin-top: -2px
+          font:
+            size: 14px
+            weight: bold
+            family: "Georgia", sans-serif
+            variant: small-caps
+
+    #buy_now
+      +column(10)
+      margin: -140px 0px 0px 132px
+      border-top: 1px dotted #666
+      border-right: 1px dotted #666
+      border-bottom: 1px dotted #666
+      padding-right: 5px
+      height: 120px
+      width: 380px
+
+      .see_options
+        +column(4)
+        float: right
+        margin-top: 0xp
+        a
+          text-decoration: none
+          color: #12A1C6
+          font:
+            size: 12px
+            weight: bold
+            family: "Arial", sans-serif
+        a:hover
+          text-decoration: underline
+
+      .div_spacing
+        padding-top: 20px
+
+      .button
+        a img
+          +column(10)
+          margin: 0px 0px 0px 195px
+          width: 178px
+          height: 40px
+
+
+      .time_remaining
+        +column(10)
+        margin: 0px 0px 0px 185px
+        width: 200px
+        height: 20px
+        text-align: center
+        color: #6E6E6E
+        font:
+          size: 12px
+          family: "Georgia", sans-serif
+          style: italic
+
+      .gift_link
+        +column(10, true)
+        vertical-align: middle
+        a:hover
+          text-decoration: underline
+        .gift_image
+          +prepend(5)
+          +column(1)
+          margin:
+            right: 25px
+            top: -3px
+        .gift_text
+          +column(3,true)
+          padding-top: 10px
+          a
+            text-decoration: none
+            color: #12A1C6
+            font:
+              size: 12px
+              weight: bold
+              family: "Arial", sans-serif
+
+      .sub_title_1
+        +column(3)
+        width: 130px
+        height: 20px
+        margin: 35px 0px 0px -90px
+        color: red
+        font:
+          size: 12px
+          weight: bold
+          family: "Georgia", sans-serif
+          variant: small-caps
+
+      .sub_title_2
+        +column(4)
+        margin: 34px 0px 0px -10px
+        color: #424242
+        font:
+          size: 16px
+          family: "Times", serif
+          variant: normal
+          style: italic
+
+    #social
+      +column(4)
+      margin: 0px 0px 0px 310px
+      padding-left: 10px
+      a
+        text-decoration: none
+        padding-right: 5px
+
+
+    #description
+      +column(12)
+      margin: 10px 0px 0px 41px
+      padding-bottom: 10px
+      color: #757575
+      font:
+        size: 11px
+        weight: normal
+        family: "Georgia", serif
+      line-height: 120%
+      height: 65px
+      width: 500px
+
+    #fine_print
+      +column(8)
+      margin: 0px 0px 0px 40px
+      color: #757575
+      font:
+        size: 11px
+        weight: normal
+        family: "Georgia", serif
+      height: 58px
+      width: 220px
+
+    #merchant_address
+      +column(6,true)
+      float: right
+      margin: 0px 0px 0px 0px
+      height: 54px
+      color: #5D5D5D
+      line-height: 130%
+      font:
+        size: 10px
+        weight: bold
+        family: "Georgia", serif
+      a
+        text-decoration: none
+        color: #3CACEE
+        font-weight: bold
+      a:hover
+        text-decoration: underline
+      img
+        vertical-align: top
+        margin-left: 10px
+      #merchant_google_map_location
+        a img
+          +column(2)
+          margin: 0px 0px 0px 0px
+          width: 32px
+          height: 41px
+
+
+  #bottom_border
+    position: relative
+    +column(22)
+    height: 26px
+    margin: 10px 0px 10px 0px
+    background: url(/images/border_bottom.jpg) repeat-x
+
+
+
+#email_signup_container
+  .email_signup
+    margin-top: 20px
+    +column(22, true)
+    background-color: #B3C05C
+    height: 36px
+    margin-bottom: 0px
+    margin-left: 10px
+    -moz-border-radius: 24px
+    -webkit-border-radius: 24px
+    display: none
+    #message
+      color: white
+      margin-top: 10px
+      padding-left: 10px
+      .caps
+        +column(5)
+        text-align: center
+        letter-spacing: 2px
+        font:
+          size: 12px
+          family: "Arial", sans-serif
+          weight: bold
+      .italics
+        +column(6)
+        margin-top: -2px
+        margin-left: -8px
+        font:
+          size: 15px
+          family: "Times", serif
+          weight: normal
+          style: italic
+      .input
+        +column(7)
+        margin: -7px 0px 0px 15px
+        text-align: center
+        #form_contact_email
+          font:
+            size: 16px
+            family: "Times", sans-serif
+            style: italic
+          color: #A4A4A4
+          width: 280px
+      .button
+        +column(3)
+        margin: -5px 0px 0px 28px
+        padding-top: 6px
+        height: 20px
+        text-align: center
+        letter-spacing: 2px
+        background-color: #404B00
+        -moz-border-radius: 24px
+        -webkit-border-radius: 24px
+        font:
+          size: 13px
+          family: "Arial, Verdana", sans-serif
+          weight: normal
+          variant: small-caps
+      .button:hover
+        cursor: pointer
+
+
+.bottom_nav
+  .back
+    +generic_button_link(2)
+  .edit
+    +generic_button_link(3)
+
